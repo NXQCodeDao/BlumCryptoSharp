@@ -1,4 +1,31 @@
- string StartFarmingBlum(string Token, string ProxyNe)
+  WebProxy ConfigProxy(string Proxy)
+  {
+      if (Proxy.Split(':').Length == 4)
+      {
+          WebProxy proxy = new WebProxy(Proxy.Split(':')[0], Convert.ToInt32(Proxy.Split(':')[1]))
+          {
+              Credentials = new NetworkCredential(Proxy.Split(':')[2], Proxy.Split(':')[3])
+          };
+          return proxy;
+
+      }
+      else if (Proxy.Split(':').Length == 2)
+      {
+          WebProxy proxy = new WebProxy(Proxy.Split(':')[0], Convert.ToInt32(Proxy.Split(':')[1]));
+          return proxy;
+      }
+      else
+      {
+          WebProxy proxy = null;
+          return proxy;
+      }
+
+
+  }
+
+
+
+string StartFarmingBlum(string Token, string ProxyNe)
  {
      var options = new RestClientOptions("https://game-domain.blum.codes")
      {
